@@ -1,14 +1,13 @@
 package service;
 
 import javax.swing.*;
-import javax.swing.text.Document;
-import javax.swing.text.EditorKit;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.*;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -26,7 +25,8 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
         JSplitPane splitPane = new JSplitPane(
                 JSplitPane.HORIZONTAL_SPLIT,
                 createTreePanel(),
-                createTextPanel());
+                createTextPanel()
+        );
         splitPane.setDividerLocation(250);
         splitPane.setOneTouchExpandable(true);
         getContentPane().add(splitPane, BorderLayout.CENTER);
@@ -34,14 +34,14 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
 
     private JPanel createTextPanel() {
         JPanel textPanel = new JPanel();
-
+        textPane.setText("Поместите сюда файлы для анализа.");
+        textPane.setEnabled(false);
+        StyledDocument doc = textPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
         textPanel.setLayout(new BorderLayout());
-        textPanel.add(new JScrollPane(textPane),
-                BorderLayout.CENTER);
-        textPanel.setMinimumSize(new Dimension(375, 0));
-        textPanel.setBorder(BorderFactory.createTitledBorder(
-                "Поместите сюда файлы для анализа."));
-
+        textPanel.add(textPane, BorderLayout.CENTER);
         return textPanel;
     }
 
@@ -59,12 +59,11 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
     }
 
     private void readFile(final String filename) {
-        EditorKit kit = textPane.getEditorKit();
-        Document document = textPane.getDocument();
-
-        try {
-            document.remove(0, document.getLength());
-            kit.read(new FileReader(filename), document, 0);
+        int i;
+        try (FileInputStream fileInputStream = new FileInputStream(filename)) {
+            while ((i = fileInputStream.read()) != -1) {
+                System.out.print((char) i);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,7 +81,6 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
 
                 e.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
                 readFile(filename);
-                textPane.setCaretPosition(0);
                 e.dropComplete(true);
             } else {
                 e.rejectDrop();
