@@ -10,13 +10,13 @@ import java.awt.event.WindowEvent;
 public class Reader extends JFrame {
 
     public static void main(String[] args) {
-        ReaderFrame analyzer = new ReaderFrame();
+        ReaderFrame reader = new ReaderFrame();
 
-        analyzer.setBounds(300, 300, 850, 350);
-        analyzer.setVisible(true);
-        analyzer.setDefaultCloseOperation(
+        reader.setBounds(300, 300, 850, 350);
+        reader.setVisible(true);
+        reader.setDefaultCloseOperation(
                 WindowConstants.DISPOSE_ON_CLOSE);
-        analyzer.addWindowListener(new WindowAdapter() {
+        reader.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
                 System.exit(0);
             }
