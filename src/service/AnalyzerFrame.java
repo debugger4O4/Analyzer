@@ -1,7 +1,9 @@
 package service;
 
 import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -34,16 +36,29 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
 
     private JPanel createTextPanel() {
         JPanel textPanel = new JPanel();
-        textPane.setText("Поместите сюда файлы для анализа.");
+
+        textPane.setText("Перетащите сюда файлы для анализа");
         textPane.setEnabled(false);
+        textPane.setFont(new Font(Font.DIALOG, Font.BOLD, 24));
+
+        // Горизнтальное выравнивание текста по центру JTextPane. Вертикального выравнивания нет
         StyledDocument doc = textPane.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
         textPanel.setLayout(new BorderLayout());
         textPanel.add(textPane, BorderLayout.CENTER);
+
+        int gap = 20;
+        textPanel.add(Box.createHorizontalStrut(gap), BorderLayout.EAST);
+        textPanel.add(Box.createHorizontalStrut(gap), BorderLayout.WEST);
+        textPanel.add(Box.createVerticalStrut(gap), BorderLayout.NORTH);
+        textPanel.add(Box.createVerticalStrut(gap), BorderLayout.SOUTH);
+
         return textPanel;
     }
+
 
     private JPanel createTreePanel() {
         JPanel treePanel = new JPanel();
@@ -53,7 +68,7 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
         treePanel.add(new JScrollPane(tree), BorderLayout.CENTER);
         treePanel.setBorder(
                 BorderFactory.createTitledBorder(
-                        "Выберите и перенесите файлы для анализа."));
+                        "Выберите и перенесите файлы для анализа"));
 
         return treePanel;
     }
