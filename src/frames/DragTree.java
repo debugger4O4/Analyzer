@@ -77,7 +77,7 @@ public class DragTree extends JTree implements DragGestureListener,
     }
 
     private DefaultTreeModel createTreeModel() {
-        File root = new File("for_analyze");
+        File root = new File("for_read");
         FileNode rootNode = new FileNode(root);
         rootNode.explore();
         return new DefaultTreeModel(rootNode);
