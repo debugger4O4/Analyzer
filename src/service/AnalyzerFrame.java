@@ -68,7 +68,7 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
         treePanel.add(new JScrollPane(tree), BorderLayout.CENTER);
         treePanel.setBorder(
                 BorderFactory.createTitledBorder(
-                        "Выберите и перенесите файлы для анализа"));
+                        "Выберите и перенесите файлы для анализа по одному"));
 
         return treePanel;
     }

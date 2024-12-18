@@ -77,7 +77,7 @@ public class DragTree extends JTree implements DragGestureListener,
     }
 
     private DefaultTreeModel createTreeModel() {
-        File root = new File("C:\\Users\\seera\\config");
+        File root = new File("for_analyze");
         FileNode rootNode = new FileNode(root);
         rootNode.explore();
         return new DefaultTreeModel(rootNode);
