@@ -1,4 +1,4 @@
-import service.AnalyzerFrame;
+import frames.ReaderFrame;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -7,10 +7,10 @@ import java.awt.event.WindowEvent;
 /**
  * Запуск приложения.
  */
-public class Analyzer extends JFrame {
+public class Reader extends JFrame {
 
     public static void main(String[] args) {
-        AnalyzerFrame analyzer = new AnalyzerFrame();
+        ReaderFrame analyzer = new ReaderFrame();
 
         analyzer.setBounds(300, 300, 850, 350);
         analyzer.setVisible(true);

@@ -1,4 +1,4 @@
-package service;
+package frames;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
@@ -15,12 +15,12 @@ import java.io.IOException;
 /**
  * Класс графического интерфейся приложения.
  */
-public class AnalyzerFrame extends JFrame implements DropTargetListener {
+public class ReaderFrame extends JFrame implements DropTargetListener {
 
     private final JTextPane textPane = new JTextPane();
 
-    public AnalyzerFrame() {
-        super("Анализатор");
+    public ReaderFrame() {
+        super("Reader");
         new DropTarget(textPane,
                 DnDConstants.ACTION_COPY_OR_MOVE,
                 this);
@@ -37,7 +37,7 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
     private JPanel createTextPanel() {
         JPanel textPanel = new JPanel();
 
-        textPane.setText("Перетащите сюда файлы для анализа");
+        textPane.setText("Drag files here for analysis");
         textPane.setEnabled(false);
         textPane.setFont(new Font(Font.DIALOG, Font.BOLD, 24));
 
@@ -68,7 +68,7 @@ public class AnalyzerFrame extends JFrame implements DropTargetListener {
         treePanel.add(new JScrollPane(tree), BorderLayout.CENTER);
         treePanel.setBorder(
                 BorderFactory.createTitledBorder(
-                        "Выберите и перенесите файлы для анализа по одному"));
+                        "Select and transfer files for analysis one by one"));
 
         return treePanel;
     }

@@ -1,4 +1,4 @@
-package service;
+package frames;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.File;

@@ -1,4 +1,4 @@
-package service;
+package frames;
 
 import javax.swing.*;
 import javax.swing.event.TreeExpansionEvent;
